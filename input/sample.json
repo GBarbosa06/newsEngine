@@ -1,86 +1,116 @@
 {
-  "theme": "blue",
-  "ratio": "1080x1350",
-  "slug": "node-22-features",
-  "handle": "@dev.newsletter",
-  "social_caption": "O Node.js 22 trouxe novidades gigantes para quem desenvolve backend! 🚀\n\nAgora temos suporte nativo a WebSocket client, execução direta de arquivos TypeScript sem flags complexas, e melhorias massivas no motor V8.\n\nConfira no carrossel o resumo das principais mudanças que impactam seu dia a dia!",
-  "hashtags": [
-    "nodejs",
-    "javascript",
-    "backend",
-    "webdev",
-    "programacao",
-    "tecnologia"
-  ],
-  "slides": [
-    {
-      "type": "cover",
-      "tag": "NODE.JS UPDATE",
-      "title": "Node.js 22: As novidades que você precisa conhecer",
-      "subtitle": "WebSocket nativo, suporte a TypeScript e V8 atualizado",
-      "highlight": "Versão com foco total em performance e produtividade do dev"
-    },
-    {
-      "type": "content",
-      "tag": "DESTAQUES",
-      "title": "O que chegou de mais importante?",
-      "body": "A versão consolida recursos modernos sem a necessidade de pacotes externos pesados no package.json.",
-      "bullets": [
-        {
-          "title": "WebSocket Client Nativo",
-          "text": "Agora habilitado por padrão, sem precisar de dependências como 'ws' para conexões simples de cliente."
-        },
-        {
-          "title": "Motor V8 12.4",
-          "text": "Traz suporte a Set methods (intersecção, união), WebAssembly Garbage Collection e melhorias de garbage collector."
-        },
-        {
-          "title": "Carregamento síncrono de ESM",
-          "text": "Suporte a require() para carregar módulos ECMAScript síncronos com a flag experimental."
-        }
-      ]
-    },
-    {
-      "type": "code",
-      "tag": "EXEMPLO PRÁTICO",
-      "title": "WebSocket Nativo em Ação",
-      "description": "Veja como abrir uma conexão sem instalar bibliotecas externas:",
-      "language": "client.js",
-      "code": "const socket = new WebSocket('wss://echo.websocket.org');\n\nsocket.addEventListener('open', () => {\n  console.log('Conectado com sucesso!');\n  socket.send('Olá do Node.js 22!');\n});\n\nsocket.addEventListener('message', (event) => {\n  console.log('Resposta do servidor:', event.data);\n});",
-      "note": "Funciona exatamente com a mesma API padronizada dos navegadores modernos!"
-    },
-    {
-      "type": "comparison",
-      "tag": "COMPARAÇÃO",
-      "title": "Antes vs Agora no Node.js",
-      "subtitle": "Menos dependências de terceiros e mais APIs web nativas",
-      "left": {
-        "title": "Versões Anteriores",
-        "points": [
-          "Necessidade de instalar 'ws' ou 'isomorphic-ws'",
-          "Scripts auxiliares para operações de conjuntos (Sets)",
-          "Complexidade na interoperabilidade CommonJS e ESM"
-        ]
-      },
-      "right": {
-        "title": "Node.js 22",
-        "points": [
-          "WebSocket global nativo disponível de fábrica",
-          "Métodos nativos de Set (intersection, union, difference)",
-          "require() suportando módulos ESM síncronos nativamente"
-        ]
-      }
-    },
-    {
-      "type": "cta",
-      "tag": "CONCLUSÃO",
-      "title": "Vale a pena atualizar?",
-      "takeaway": "Sim! Para novos projetos ou pipelines modernos, as novas APIs nativas reduzem dependências e aumentam a robustez.",
-      "actions": [
-        { "icon": "💾", "text": "Salve para consultar quando for atualizar sua stack" },
-        { "icon": "🚀", "text": "Compartilhe com o seu time de desenvolvimento" },
-        { "icon": "💬", "text": "Você já usa Node 22 em produção? Deixe nos comentários!" }
-      ]
-    }
-  ]
+"theme": "amber",
+"ratio": "1080x1350",
+"slug": "java-27-novidades",
+"handle": "@seuperfil.dev",
+"social_caption": "☕ Java 27 chegou em 15 de setembro de 2026 — e a atualização vai muito além de sintaxe. O JDK 27 traz 9 JEPs, incluindo melhorias em pattern matching, Structured Concurrency, segurança pós-quântica, JFR e otimizações de memória na JVM. Entre os destaques: Compact Object Headers agora são padrão, G1 passa a ser o GC padrão em todos os ambientes e o TLS 1.3 ganha troca híbrida de chaves resistente a ataques quânticos. Algumas novidades ainda são Preview ou Incubator, então atenção antes de levar tudo para produção. 🚀",
+"hashtags": [
+"java",
+"java27",
+"jdk27",
+"openjdk",
+"backend",
+"programacao",
+"desenvolvimento",
+"jvm",
+"dev"
+],
+"slides": [
+{
+"type": "cover",
+"tag": "JAVA 27",
+"title": "Java 27 chegou: o que realmente mudou?",
+"subtitle": "9 JEPs, JVM mais eficiente e segurança pós-quântica.",
+"highlight": "Lançado em 15 de setembro de 2026"
+},
+{
+"type": "content",
+"tag": "DESTAQUES",
+"title": "As mudanças que você precisa conhecer",
+"body": "O JDK 27 mexe em linguagem, concorrência, JVM, segurança e observabilidade.",
+"bullets": [
+{
+"title": "Patterns com primitivos",
+"text": "JEP 532 amplia pattern matching, instanceof e switch para tipos primitivos. Ainda é Preview."
+},
+{
+"title": "Structured Concurrency",
+"text": "JEP 533 continua evoluindo o modelo de tarefas concorrentes como uma única unidade de trabalho."
+},
+{
+"title": "Lazy Constants",
+"text": "JEP 531 permite constantes inicializadas sob demanda mantendo oportunidades de otimização pela JVM."
+}
+]
+},
+{
+"type": "code",
+"tag": "NA PRÁTICA",
+"title": "switch agora entende mais primitivos",
+"description": "Com a JEP 532, switch pode trabalhar diretamente com tipos como long:",
+"language": "Java 27 — Preview",
+"code": "long status = 200L;\n\nString result = switch (status) {\n    case 200L -> \"OK\";\n    case 404L -> \"NOT FOUND\";\n    default -> \"OTHER\";\n};",
+"note": "Recurso Preview: compile e execute usando --enable-preview."
+},
+{
+"type": "content",
+"tag": "JVM",
+"title": "Menos memória sem mudar seu código",
+"body": "Duas mudanças importantes passam a valer por padrão no runtime.",
+"bullets": [
+{
+"title": "Compact Object Headers",
+"text": "JEP 534 reduz headers de objetos de 96 para 64 bits em arquiteturas 64-bit e agora vem habilitada por padrão."
+},
+{
+"title": "G1 em todos os ambientes",
+"text": "JEP 523 torna o G1 o Garbage Collector padrão em todos os ambientes suportados."
+},
+{
+"title": "Mais eficiência",
+"text": "Headers menores podem reduzir o heap, melhorar localidade dos dados e aumentar a densidade das aplicações."
+}
+]
+},
+{
+"type": "content",
+"tag": "SEGURANÇA",
+"title": "Java se prepara para a era pós-quântica",
+"body": "Uma das novidades mais estratégicas do JDK 27 está no TLS 1.3.",
+"bullets": [
+{
+"title": "TLS pós-quântico",
+"text": "JEP 527 adiciona troca híbrida de chaves combinando criptografia tradicional e resistente a ataques quânticos."
+},
+{
+"title": "PEM nativo",
+"text": "JEP 538 traz API Preview para codificar e decodificar chaves, certificados e CRLs em formato PEM."
+},
+{
+"title": "JFR mais seguro",
+"text": "JEP 536 permite redigir dados sensíveis de argumentos, propriedades e variáveis antes de entrarem na gravação."
+}
+]
+},
+{
+"type": "cta",
+"tag": "CONCLUSÃO",
+"title": "Java 27 merece sua atenção",
+"takeaway": "Para produção, avalie compatibilidade e maturidade dos recursos. Para estudo e testes, JDK 27 já mostra claramente a direção da plataforma: eficiência, concorrência estruturada e segurança pós-quântica.",
+"actions": [
+{
+"icon": "💾",
+"text": "Salve este resumo das novidades do Java 27"
+},
+{
+"icon": "🚀",
+"text": "Compartilhe com quem trabalha com Java"
+},
+{
+"icon": "💬",
+"text": "Qual novidade do JDK 27 você quer testar primeiro?"
+}
+]
+}
+]
 }

@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js input/sample.json",
-    "generate": "node src/index.js"
+    "generate": "node src/index.js",
+    "prompt": "./colarPrompt"
   },
   "keywords": [],
   "type": "commonjs",

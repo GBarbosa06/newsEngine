@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+  echo "Uso: ./colarPrompt <tema>"
+  echo "Exemplo: ./colarPrompt \"Novidades do Java 27\""
+  exit 0
+fi
+
+if [ -z "$1" ]; then
+  echo "Erro: Nenhum tema informado."
+  echo "Uso: ./colarPrompt <tema> (use -h ou --help para ajuda)"
+  exit 1
+fi
+
+THEME="$*"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROMPT_FILE="$SCRIPT_DIR/PROMPT.md"
+
+if [ ! -f "$PROMPT_FILE" ]; then
+  echo "Erro: Arquivo PROMPT.md não encontrado em $PROMPT_FILE"
+  exit 1
+fi
+
+# Escapa barras (/) e e-comercial (&) para o sed não quebrar a substituição
+ESCAPED_THEME=$(printf '%s\n' "$THEME" | sed -e 's/[\/&]/\\&/g')
+
+# O sed atua em stream (puramente em memória), sem alterar o arquivo em disco
+if command -v copyq >/dev/null 2>&1; then
+  sed "s/\[DIGITE SEU TÓPICO AQUI\]/$ESCAPED_THEME/g" "$PROMPT_FILE" | copyq copy -
+  echo "✅ Prompt sobre \"$THEME\" copiado para o CopyQ!"
+elif command -v wl-copy >/dev/null 2>&1; then
+  sed "s/\[DIGITE SEU TÓPICO AQUI\]/$ESCAPED_THEME/g" "$PROMPT_FILE" | wl-copy
+  echo "✅ Prompt sobre \"$THEME\" copiado (wl-copy)!"
+elif command -v xclip >/dev/null 2>&1; then
+  sed "s/\[DIGITE SEU TÓPICO AQUI\]/$ESCAPED_THEME/g" "$PROMPT_FILE" | xclip -selection clipboard
+  echo "✅ Prompt sobre \"$THEME\" copiado (xclip)!"
+else
+  echo "❌ Utilitário 'copyq' não encontrado no PATH."
+  exit 1
+fi
