@@ -33,7 +33,8 @@ newsEngine/
 │   │   └── cta.js         # Chamada para ação e encerramento
 │   ├── renderer.js        # Motor de compilação Satori + Resvg
 │   └── index.js           # CLI runner
-├── PROMPT.md              # Prompt mestre para colar no Gemini / ChatGPT
+├── colarPrompt            # Script para preencher tema e copiar prompt (CopyQ)
+├── PROMPT.md              # Prompt mestre pronto para envio a LLMs
 └── package.json
 ```
 
@@ -81,4 +82,26 @@ node src/index.js input/sample.yaml --handle @meu.perfil --theme emerald
 
 ## 🤖 Como Gerar Novos Posts com IA
 
-Consulte o arquivo [PROMPT.md](PROMPT.md) para copiar o prompt mestre e usar no **Gemini**, **ChatGPT** ou **Claude**. Basta informar o tema desejado (ex: *"Novidades do Rust 1.85"*), salvar a saída na pasta `input/` e rodar a CLI.
+O fluxo foi desenhado para ser o mais rápido possível:
+
+### 1. Copiar o prompt com seu tema
+Use o script `./colarPrompt` informando o assunto. Ele injeta o tema no [PROMPT.md](PROMPT.md) em memória e já copia tudo direto para sua área de transferência (via **CopyQ** / clipboard):
+
+```bash
+./colarPrompt "Novidades do Rust 1.85"
+# ou via npm:
+npm run prompt -- "Novidades do Rust 1.85"
+```
+
+### 2. Gerar com a IA
+Cole o prompt no **Gemini**, **ChatGPT** ou **Claude**. A IA retornará estritamente o bloco JSON formatado e compatível.
+
+### 3. Salvar e Gerar os Slides
+Salve a resposta da IA como `.json` ou `.yaml` dentro de `input/` (ex: `input/rust-185.json`) e execute:
+
+```bash
+node src/index.js input/rust-185.json
+```
+
+Os slides prontos em PNG e o texto da legenda (`caption.txt`) serão gerados na pasta `output/` em menos de 2 segundos!
+
