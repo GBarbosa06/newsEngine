@@ -1,0 +1,60 @@
+theme: purple
+ratio: 1080x1350
+slug: docker-compose-watch
+handle: "@dev.ops"
+social_caption: |
+  Você ainda reinicia containers manualmente ao alterar código? 🐳
+  
+  O Docker Compose Watch sincroniza arquivos em tempo real entre o host e o container, acelerando muito o ciclo de desenvolvimento local.
+hashtags:
+  - docker
+  - devops
+  - containers
+  - backend
+  - produtividade
+slides:
+  - type: cover
+    tag: DOCKER & DEVOPS
+    title: "Docker Compose Watch: Adeus rebuild manual"
+    subtitle: Sincronização automática de código para containers em segundos
+    highlight: Dobre a velocidade do seu ambiente de desenvolvimento local
+
+  - type: content
+    tag: FUNCIONAMENTO
+    title: Como funciona o Watch?
+    body: O Compose monitora alterações de arquivos locais e executa ações pré-definidas sem necessidade de reiniciar o container inteiro.
+    bullets:
+      - title: Modo Sync
+        text: Copia arquivos modificados diretamente para o container quase que instantaneamente.
+      - title: Modo Rebuild
+        text: "Reconstrói a imagem apenas quando arquivos críticos (ex: package.json) mudarem."
+      - title: Modo Sync+Restart
+        text: Ideal para linguagens compiladas ou que exigem reinício rápido de processo.
+
+  - type: code
+    tag: CONFIGURAÇÃO
+    title: Exemplo no docker-compose.yml
+    description: "Adicione a seção watch no seu serviço:"
+    language: docker-compose.yml
+    code: |
+      services:
+        web:
+          build: .
+          develop:
+            watch:
+              - action: sync
+                path: ./src
+                target: /app/src
+              - action: rebuild
+                path: ./package.json
+    note: Execute com 'docker compose watch' para ativar o live sync!
+
+  - type: cta
+    tag: CONCLUSÃO
+    title: Pronto para testar?
+    takeaway: Menos tempo esperando build de container, mais tempo focado em código.
+    actions:
+      - icon: 💾
+        text: Salve este post para configurar no seu próximo projeto
+      - icon: 🔄
+        text: Envie para aquele dev que ainda dá 'docker compose up --build' a cada linha alterada
