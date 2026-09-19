@@ -48,6 +48,17 @@ function parseArgs(args) {
     }
   }
 
+  // Se nenhum arquivo de entrada foi passado explicitamente, tenta o padrão input/sample.json
+  if (!options.inputFile) {
+    const defaultSampleJson = path.join(process.cwd(), 'input', 'sample.json');
+    const defaultSampleYaml = path.join(process.cwd(), 'input', 'sample.yaml');
+    if (fs.existsSync(defaultSampleJson)) {
+      options.inputFile = defaultSampleJson;
+    } else if (fs.existsSync(defaultSampleYaml)) {
+      options.inputFile = defaultSampleYaml;
+    }
+  }
+
   return options;
 }
 

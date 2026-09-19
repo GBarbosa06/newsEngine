@@ -1,114 +1,117 @@
 {
 "theme": "amber",
 "ratio": "1080x1350",
-"slug": "java-27-novidades",
+"slug": "java-ainda-vale-a-pena-em-2026",
 "handle": "@seuperfil.dev",
-"social_caption": "☕ Java 27 chegou em 15 de setembro de 2026 — e a atualização vai muito além de sintaxe. O JDK 27 traz 9 JEPs, incluindo melhorias em pattern matching, Structured Concurrency, segurança pós-quântica, JFR e otimizações de memória na JVM. Entre os destaques: Compact Object Headers agora são padrão, G1 passa a ser o GC padrão em todos os ambientes e o TLS 1.3 ganha troca híbrida de chaves resistente a ataques quânticos. Algumas novidades ainda são Preview ou Incubator, então atenção antes de levar tudo para produção. 🚀",
+"social_caption": "☕ Java ainda vale a pena aprender em 2026? Sim — mas o Java que você deveria aprender não é o Java de 2015. O Java 27 chegou em setembro de 2026, enquanto o Java 25 segue como a versão LTS atual. A plataforma ganhou sintaxe mais enxuta, virtual threads, records, pattern matching e continua fortemente presente em sistemas corporativos, back-end e cloud. Para quem quer trabalhar com back-end, APIs, microsserviços, fintechs e sistemas enterprise, Java continua sendo uma escolha relevante. O caminho em 2026: Java moderno + Spring Boot + SQL + Docker + cloud. ☕🚀",
 "hashtags": [
 "java",
-"java27",
-"jdk27",
-"openjdk",
-"backend",
 "programacao",
-"desenvolvimento",
-"jvm",
-"dev"
+"backend",
+"springboot",
+"dev",
+"tecnologia",
+"cloud",
+"carreiraTech"
 ],
 "slides": [
 {
 "type": "cover",
-"tag": "JAVA 27",
-"title": "Java 27 chegou: o que realmente mudou?",
-"subtitle": "9 JEPs, JVM mais eficiente e segurança pós-quântica.",
-"highlight": "Lançado em 15 de setembro de 2026"
+"tag": "JAVA EM 2026",
+"title": "Java ainda vale a pena aprender?",
+"subtitle": "30 anos depois, a linguagem continua evoluindo — e o Java 27 acabou de chegar.",
+"highlight": "Spoiler: Java não parou no Java 8."
 },
 {
 "type": "content",
-"tag": "DESTAQUES",
-"title": "As mudanças que você precisa conhecer",
-"body": "O JDK 27 mexe em linguagem, concorrência, JVM, segurança e observabilidade.",
+"tag": "ECOSSISTEMA",
+"title": "Java continua muito vivo",
+"body": "A plataforma mantém um ciclo rápido de evolução e uma base enterprise madura.",
 "bullets": [
 {
-"title": "Patterns com primitivos",
-"text": "JEP 532 amplia pattern matching, instanceof e switch para tipos primitivos. Ainda é Preview."
+"title": "Java 27 chegou",
+"text": "Lançado em setembro de 2026, traz melhorias em segurança, performance e produtividade."
 },
 {
-"title": "Structured Concurrency",
-"text": "JEP 533 continua evoluindo o modelo de tarefas concorrentes como uma única unidade de trabalho."
+"title": "Java 25 é LTS",
+"text": "A versão LTS atual oferece uma base moderna para projetos que priorizam estabilidade."
 },
 {
-"title": "Lazy Constants",
-"text": "JEP 531 permite constantes inicializadas sob demanda mantendo oportunidades de otimização pela JVM."
+"title": "Enterprise continua forte",
+"text": "Java segue especialmente relevante em back-end, cloud, microsserviços e sistemas corporativos."
 }
 ]
+},
+{
+"type": "comparison",
+"tag": "JAVA MODERNO",
+"title": "Esqueça a imagem do Java antigo",
+"subtitle": "A linguagem mudou bastante nas versões recentes.",
+"left": {
+"title": "Java antigo",
+"points": [
+"Muito boilerplate",
+"POJOs enormes com getters e setters",
+"Concorrência baseada em threads pesadas",
+"Código frequentemente mais verboso"
+]
+},
+"right": {
+"title": "Java moderno",
+"points": [
+"Records e pattern matching",
+"Virtual threads",
+"Switch expressions",
+"Sintaxe e APIs progressivamente mais enxutas"
+]
+}
 },
 {
 "type": "code",
 "tag": "NA PRÁTICA",
-"title": "switch agora entende mais primitivos",
-"description": "Com a JEP 532, switch pode trabalhar diretamente com tipos como long:",
-"language": "Java 27 — Preview",
-"code": "long status = 200L;\n\nString result = switch (status) {\n    case 200L -> \"OK\";\n    case 404L -> \"NOT FOUND\";\n    default -> \"OTHER\";\n};",
-"note": "Recurso Preview: compile e execute usando --enable-preview."
+"title": "Java moderno pode ser simples",
+"description": "Records reduzem drasticamente o boilerplate para objetos de dados:",
+"language": "Java",
+"code": "record Usuario(String nome, int idade) {}\n\nvar user = new Usuario(\"Ana\", 25);\nSystem.out.println(user.nome());",
+"note": "Construtor, equals, hashCode e toString são gerados automaticamente."
 },
 {
 "type": "content",
-"tag": "JVM",
-"title": "Menos memória sem mudar seu código",
-"body": "Duas mudanças importantes passam a valer por padrão no runtime.",
+"tag": "CARREIRA",
+"title": "Quando faz sentido aprender Java?",
+"body": "Principalmente se seu objetivo estiver no ecossistema de back-end e aplicações corporativas.",
 "bullets": [
 {
-"title": "Compact Object Headers",
-"text": "JEP 534 reduz headers de objetos de 96 para 64 bits em arquiteturas 64-bit e agora vem habilitada por padrão."
+"title": "Back-end",
+"text": "Aprenda Java moderno e depois avance para Spring Boot, APIs REST e testes."
 },
 {
-"title": "G1 em todos os ambientes",
-"text": "JEP 523 torna o G1 o Garbage Collector padrão em todos os ambientes suportados."
+"title": "Mercado enterprise",
+"text": "É especialmente útil para sistemas financeiros, corporativos e aplicações de longa duração."
 },
 {
-"title": "Mais eficiência",
-"text": "Headers menores podem reduzir o heap, melhorar localidade dos dados e aumentar a densidade das aplicações."
-}
-]
-},
-{
-"type": "content",
-"tag": "SEGURANÇA",
-"title": "Java se prepara para a era pós-quântica",
-"body": "Uma das novidades mais estratégicas do JDK 27 está no TLS 1.3.",
-"bullets": [
-{
-"title": "TLS pós-quântico",
-"text": "JEP 527 adiciona troca híbrida de chaves combinando criptografia tradicional e resistente a ataques quânticos."
-},
-{
-"title": "PEM nativo",
-"text": "JEP 538 traz API Preview para codificar e decodificar chaves, certificados e CRLs em formato PEM."
-},
-{
-"title": "JFR mais seguro",
-"text": "JEP 536 permite redigir dados sensíveis de argumentos, propriedades e variáveis antes de entrarem na gravação."
+"title": "Não aprenda isoladamente",
+"text": "Combine Java com SQL, Git, Docker, HTTP, mensageria e fundamentos de cloud."
 }
 ]
 },
 {
 "type": "cta",
 "tag": "CONCLUSÃO",
-"title": "Java 27 merece sua atenção",
-"takeaway": "Para produção, avalie compatibilidade e maturidade dos recursos. Para estudo e testes, JDK 27 já mostra claramente a direção da plataforma: eficiência, concorrência estruturada e segurança pós-quântica.",
+"title": "Java vale a pena em 2026?",
+"takeaway": "Sim. Para back-end e enterprise, Java moderno continua sendo uma stack relevante — comece pelas versões atuais, não por tutoriais presos ao Java 8.",
 "actions": [
 {
 "icon": "💾",
-"text": "Salve este resumo das novidades do Java 27"
+"text": "Salve este roadmap para estudar depois"
 },
 {
 "icon": "🚀",
-"text": "Compartilhe com quem trabalha com Java"
+"text": "Compartilhe com quem está entrando em programação"
 },
 {
 "icon": "💬",
-"text": "Qual novidade do JDK 27 você quer testar primeiro?"
+"text": "Você começaria por Java, Python ou JavaScript?"
 }
 ]
 }

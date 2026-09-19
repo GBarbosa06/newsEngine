@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node src/index.js input/sample.json",
+    "start": "./newsEngine",
     "generate": "node src/index.js",
-    "prompt": "./colarPrompt"
+    "copy": "./newsEngine --copy",
+    "paste": "./newsEngine --paste"
   },
   "keywords": [],
   "type": "commonjs",

@@ -3,10 +3,7 @@ const { renderHeader, renderFooter } = require('./common');
 function escapeHtml(str) {
   return String(str)
     .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;');
+    .replace(/</g, '&lt;');
 }
 
 function renderCode(slide, { slideIndex, totalSlides, handle, theme }) {
@@ -61,9 +58,14 @@ function renderCode(slide, { slideIndex, totalSlides, handle, theme }) {
         </div>
 
         ${slide.note ? `
-          <div style="display: flex; background: ${theme.cardBg}; border: 1px solid ${theme.cardBorder}; border-radius: 12px; padding: 18px 24px;">
+          <div style="display: flex; align-items: center; background: ${theme.cardBg}; border: 1px solid ${theme.cardBorder}; border-radius: 12px; padding: 18px 24px;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${theme.primary}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 12px; flex-shrink: 0;">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="16" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
             <span style="font-size: 22px; color: ${theme.primary}; font-weight: 700;">
-              📌 ${slide.note}
+              ${slide.note}
             </span>
           </div>
         ` : ''}

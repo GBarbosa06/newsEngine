@@ -31,8 +31,12 @@ function renderComparison(slide, { slideIndex, totalSlides, handle, theme }) {
           <!-- Left Column (Before / Problem) -->
           <div style="display: flex; flex-direction: column; flex: 1; background: rgba(239, 68, 68, 0.08); border: 1.5px solid rgba(239, 68, 68, 0.25); border-radius: 20px; padding: 28px; gap: 16px;">
             <div style="display: flex; align-items: center; gap: 10px;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f87171" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
               <span style="font-size: 26px; font-weight: 700; color: #f87171;">
-                ❌ ${left.title || 'Antes'}
+                ${left.title || 'Antes'}
               </span>
             </div>
             <div style="display: flex; flex-direction: column; gap: 14px; margin-top: 6px;">
@@ -47,8 +51,11 @@ function renderComparison(slide, { slideIndex, totalSlides, handle, theme }) {
           <!-- Right Column (Now / Solution) -->
           <div style="display: flex; flex-direction: column; flex: 1; background: rgba(16, 185, 129, 0.08); border: 1.5px solid rgba(16, 185, 129, 0.3); border-radius: 20px; padding: 28px; gap: 16px;">
             <div style="display: flex; align-items: center; gap: 10px;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
               <span style="font-size: 26px; font-weight: 700; color: #34d399;">
-                ✅ ${right.title || 'Agora'}
+                ${right.title || 'Agora'}
               </span>
             </div>
             <div style="display: flex; flex-direction: column; gap: 14px; margin-top: 6px;">

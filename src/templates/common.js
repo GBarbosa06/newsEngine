@@ -71,7 +71,14 @@ function renderHeader({ tag, slideIndex, totalSlides, theme }) {
 }
 
 function renderFooter({ handle, isLast, theme }) {
-  const ctaText = isLast ? 'Compartilhe & Salve' : 'Deslize para ver ➔';
+  const ctaText = isLast ? 'Compartilhe & Salve' : 'Deslize para ver';
+  const arrowSvg = `
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="${theme.primary}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 8px;">
+      <line x1="5" y1="12" x2="19" y2="12"></line>
+      <polyline points="12 5 19 12 12 19"></polyline>
+    </svg>
+  `;
+
   return `
     <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin-top: 40px; padding-top: 24px; border-top: 1px solid rgba(255, 255, 255, 0.08);">
       <div style="display: flex; align-items: center;">
@@ -83,6 +90,7 @@ function renderFooter({ handle, isLast, theme }) {
         <span style="font-size: 20px; font-weight: 700; color: ${theme.primary};">
           ${ctaText}
         </span>
+        ${!isLast ? arrowSvg : ''}
       </div>
     </div>
   `;
