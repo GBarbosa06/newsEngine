@@ -65,24 +65,195 @@ case "$1" in
     fi
     exit 0
     ;;
-  --paste)
+--paste)
     mkdir -p "$SCRIPT_DIR/input"
-    RAW_CLIP=""
+
+    TMP_FILE="$(mktemp)"
+    trap 'rm -f "$TMP_FILE"' EXIT
+
+    # 1. Copia o clipboard diretamente para um arquivo temporário.
+    #    Nenhuma variável Bash toca no conteúdo do JSON.
     if command -v copyq >/dev/null 2>&1; then
-      RAW_CLIP=$(copyq clipboard)
+        copyq clipboard > "$TMP_FILE"
     elif command -v wl-paste >/dev/null 2>&1; then
-      RAW_CLIP=$(wl-paste)
+        wl-paste > "$TMP_FILE"
     elif command -v xclip >/dev/null 2>&1; then
-      RAW_CLIP=$(xclip -selection clipboard -o)
+        xclip -selection clipboard -o > "$TMP_FILE"
     else
-      echo "❌ Utilitário 'copyq' não encontrado no PATH."
-      exit 1
+        echo "❌ Nenhum utilitário de clipboard encontrado."
+        exit 1
     fi
 
-    # Remove delimitadores de markdown (```json e ```) se presentes
-    CLEAN_CLIP=$(printf '%s\n' "$RAW_CLIP" | sed -e 's/^```[a-zA-Z]*$//g' -e 's/^```$//g')
-    printf '%s\n' "$CLEAN_CLIP" > "$SAMPLE_FILE"
-    echo "✅ Conteúdo da área de transferência salvo em: input/sample.json"
+    # 2. Remove somente fences Markdown.
+    sed \
+        -e '/^[[:space:]]*```json[[:space:]]*$/d' \
+        -e '/^[[:space:]]*```JSON[[:space:]]*$/d' \
+        -e '/^[[:space:]]*```[[:space:]]*$/d' \
+        "$TMP_FILE" > "$SAMPLE_FILE"
+
+    # 3. Valida e, se necessário, tenta reparar campos "code".
+    node - "$SAMPLE_FILE" <<'NODE'
+const fs = require("fs");
+
+const file = process.argv[2];
+let text = fs.readFileSync(file, "utf8");
+
+function validate(json) {
+    try {
+        JSON.parse(json);
+        return null;
+    } catch (err) {
+        return err;
+    }
+}
+
+let error = validate(text);
+
+// Já está correto: não mexe em absolutamente nada.
+if (!error) {
+    console.log("✅ JSON já estava válido. Nenhum reparo necessário.");
+    process.exit(0);
+}
+
+console.log("⚠️ JSON recebido está inválido:");
+console.log(`   ${error.message}`);
+console.log("🔧 Tentando reparar campos \"code\"...");
+
+/*
+ * Localiza:
+ *
+ *     "code": " ... "
+ *
+ * e determina onde o valor realmente termina olhando o que vem
+ * depois da aspas.
+ *
+ * Aspas internas como:
+ *
+ *     -> "byte: " + b
+ *
+ * não são seguidas por ',' ou '}', então são transformadas em:
+ *
+ *     -> \"byte: \" + b
+ */
+
+function repairCodeFields(input) {
+    const marker = /"code"\s*:\s*"/g;
+
+    let result = "";
+    let cursor = 0;
+    let match;
+    let repairs = 0;
+
+    while ((match = marker.exec(input)) !== null) {
+        const valueStart = marker.lastIndex;
+
+        result += input.slice(cursor, valueStart);
+
+        let i = valueStart;
+        let value = "";
+
+        while (i < input.length) {
+            const ch = input[i];
+
+            // Sequência já escapada: preserva exatamente.
+            if (ch === "\\") {
+                value += ch;
+
+                if (i + 1 < input.length) {
+                    value += input[i + 1];
+                    i += 2;
+                } else {
+                    i++;
+                }
+
+                continue;
+            }
+
+            if (ch === '"') {
+                /*
+                 * Verifica o que existe depois da aspas.
+                 *
+                 * Se for:
+                 *
+                 *   ,
+                 *   }
+                 *   ]
+                 *
+                 * consideramos que esta aspas realmente encerra
+                 * o valor JSON.
+                 */
+                let j = i + 1;
+
+                while (
+                    j < input.length &&
+                    /\s/.test(input[j])
+                ) {
+                    j++;
+                }
+
+                const next = input[j];
+
+                if (
+                    next === "," ||
+                    next === "}" ||
+                    next === "]" ||
+                    j >= input.length
+                ) {
+                    value += '"';
+                    i++;
+                    break;
+                }
+
+                // Aspas pertencentes ao código.
+                value += '\\"';
+                repairs++;
+                i++;
+                continue;
+            }
+
+            value += ch;
+            i++;
+        }
+
+        result += value;
+        cursor = i;
+        marker.lastIndex = i;
+    }
+
+    result += input.slice(cursor);
+
+    return {
+        text: result,
+        repairs
+    };
+}
+
+const repaired = repairCodeFields(text);
+const repairedError = validate(repaired.text);
+
+if (repairedError) {
+    console.error("❌ Não foi possível reparar o JSON automaticamente.");
+    console.error(`   ${repairedError.message}`);
+    console.error("");
+    console.error("O arquivo original foi mantido sem alterações.");
+    process.exit(1);
+}
+
+// Só sobrescreve depois de confirmar que o JSON reparado é válido.
+fs.writeFileSync(file, repaired.text, "utf8");
+
+console.log(
+    `✅ JSON reparado com sucesso (${repaired.repairs} aspas corrigidas).`
+);
+NODE
+
+    STATUS=$?
+
+    if [ "$STATUS" -ne 0 ]; then
+        exit "$STATUS"
+    fi
+
+    echo "✅ Conteúdo salvo em: input/sample.json"
     exit 0
     ;;
   *)

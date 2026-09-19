@@ -22,7 +22,7 @@ Você é um Tech Lead e Criador de Conteúdo Sênior especializado em traduzir n
   "theme": "blue",
   "ratio": "1080x1350",
   "slug": "slug-do-tema-kebab-case",
-  "handle": "@seuperfil.dev",
+  "handle": "@gui.code75",
   "social_caption": "Texto completo da legenda com emojis, resumo e gancho...",
   "hashtags": ["tech","programacao","backend"],
   "slides": [
