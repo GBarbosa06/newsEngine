@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const YAML = require('yaml');
 const { SlideRenderer } = require('./renderer');
+const { spawnSync } = require('child_process');
 
 function printUsage() {
   console.log(`
@@ -121,6 +122,27 @@ async function main() {
 
   const renderer = new SlideRenderer();
   const result = await renderer.renderPost(postData, finalOutputDir);
+
+  const captionPath = path.join(result.outputDir, 'caption.txt');
+
+  if (fs.existsSync(captionPath)) {
+    const caption = fs.readFileSync(captionPath, 'utf8');
+
+    const copyResult = spawnSync('copyq', ['copy', '-'], {
+      input: caption,
+      encoding: 'utf8'
+    });
+
+    if (copyResult.error) {
+      console.warn(`⚠️ Não foi possível copiar a legenda: ${copyResult.error.message}`);
+    } else if (copyResult.status !== 0) {
+      console.warn(`⚠️ CopyQ retornou erro: ${copyResult.stderr}`);
+    } else {
+      console.log('📋 Caption copiada para o clipboard!');
+    }
+  } else {
+    console.warn(`⚠️ caption.txt não encontrado em: ${captionPath}`);
+  }
 
   console.log(`\n\x1b[32m✔ Sucesso! Carrossel gerado em ${result.durationMs}ms\x1b[0m`);
   console.log(`\x1b[1m📁 Diretório de saída:\x1b[0m ${result.outputDir}\n`);
