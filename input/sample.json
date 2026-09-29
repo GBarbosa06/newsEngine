@@ -1,115 +1,92 @@
 {
-"theme": "blue",
+"theme": "amber",
 "ratio": "1080x1350",
-"slug": "java-27-novidades",
-"handle": "@seuperfil.dev",
-"social_caption": "☕ Java 27 chegou em 15 de setembro de 2026 com 9 JEPs. Os destaques vão de headers de objetos menores e G1 como GC padrão em todos os ambientes até TLS 1.3 preparado para criptografia pós-quântica. Também temos novas evoluções em Structured Concurrency, pattern matching com primitivos, Lazy Constants, Vector API e mais segurança no JFR. 🚀 Uma release focada em performance, segurança e infraestrutura da JVM. Qual novidade você quer testar primeiro?",
+"slug": "java-vs-javascript-por-que-os-nomes-enganam",
+"handle": "@gui.code75",
+"social_caption": "☕ Java e JavaScript são a mesma coisa? Spoiler: Java está para JavaScript assim como Carro está para Carruagem! 🚗🐎\n\nEssa confusão nasceu em 1995 por pura estratégia de marketing e segue confundindo iniciantes e recrutadores até hoje. Arraste para entender a origem do nome, as diferenças de arquitetura e onde cada um brilha no mercado atual! 🚀\n\nQual dessas linguagens você mais usa no seu dia a dia? Deixe nos comentários!",
 "hashtags": [
 "java",
-"java27",
-"jdk27",
-"openjdk",
+"javascript",
 "programacao",
+"desenvolvimentoweb",
 "backend",
-"jvm",
-"dev"
+"frontend",
+"carreiradev"
 ],
 "slides": [
 {
 "type": "cover",
-"tag": "JAVA 27",
-"title": "Java 27 chegou: o que realmente mudou?",
-"subtitle": "9 JEPs com novidades em performance, segurança, concorrência e JVM.",
-"highlight": "Menos memória. Mais segurança. JVM mais moderna."
+"tag": "HISTÓRIA & ARQUITETURA",
+"title": "Java vs JavaScript: Por Que os Nomes Enganam Tanta Gente?",
+"subtitle": "A jogada de marketing de 1995 que confunde a comunidade até hoje.",
+"highlight": "Java está para JavaScript assim como Carro está para Carruagem."
 },
 {
 "type": "content",
-"tag": "DESTAQUES",
-"title": "As mudanças que você vai sentir",
-"body": "Algumas melhorias funcionam sem alterar uma linha do seu código.",
+"tag": "A ORIGEM",
+"title": "Tudo Começou Com Uma Parceria de Marketing",
+"body": "Em 1995, a Netscape queria uma linguagem leve para rodar no navegador Netscape Navigator.",
 "bullets": [
 {
-"title": "Compact Object Headers",
-"text": "Agora são padrão: headers caem de 96 para 64 bits em arquiteturas 64-bit, reduzindo o uso de heap."
+"title": "O nome original era Mocha",
+"text": "Brendan Eich criou a linguagem em 10 dias como Mocha, rebatizada depois para LiveScript."
 },
 {
-"title": "G1 em todos os ambientes",
-"text": "O G1 passa a ser o Garbage Collector padrão mesmo onde a JVM antes escolheria Serial GC."
-},
-{
-"title": "TLS pós-quântico",
-"text": "TLS 1.3 ganha key exchange híbrido resistente a futuros ataques quânticos, habilitado pelas APIs SSL existentes."
-}
-]
-},
-{
-"type": "code",
-"tag": "LINGUAGEM",
-"title": "Primitivos entram no pattern matching",
-"description": "A quinta preview do JEP 532 deixa instanceof e switch mais uniformes com tipos primitivos:",
-"language": "Java 27 Preview",
-"code": "static String classify(long value) {\n    return switch (value) {\n        case byte b -> \"byte: \" + b;\n        case short s -> \"short: \" + s;\n        case int i -> \"int: \" + i;\n        default -> \"long: \" + value;\n    };\n}",
-"note": "É preview feature: compile e execute com --enable-preview."
-},
-{
-"type": "content",
-"tag": "CONCORRÊNCIA + APIs",
-"title": "Java moderno continua evoluindo",
-"body": "Recursos importantes avançaram novamente, mas alguns ainda não são APIs definitivas.",
-"bullets": [
-{
-"title": "Structured Concurrency",
-"text": "Chega à 7ª preview para tratar tarefas concorrentes relacionadas como uma única unidade de trabalho."
-},
-{
-"title": "Lazy Constants",
-"text": "3ª preview da API para valores imutáveis inicializados somente quando necessários."
-},
-{
-"title": "Vector API",
-"text": "12ª incubação continua levando computação vetorial eficiente para analytics, IA e workloads científicos."
+"title": "Pegando carona no hype",
+"text": "Com a explosão de popularidade do Java da Sun Microsystems, a Netscape rebatizou para JavaScript como manobra comercial."
 }
 ]
 },
 {
 "type": "comparison",
-"tag": "JVM + SEGURANÇA",
-"title": "Java 27 melhora sem exigir refatoração",
-"subtitle": "Boa parte dos ganhos está debaixo do capô.",
+"tag": "PARADIGMAS & ECOSSISTEMA",
+"title": "Mundos Completamente Diferentes",
+"subtitle": "Comparativo técnico direto entre as duas tecnologias",
 "left": {
-"title": "Antes",
+"title": "Java",
 "points": [
-"Object headers tradicionais de 96 bits",
-"Serial GC ainda podia ser escolhido automaticamente",
-"Dados sensíveis podiam aparecer em gravações JFR"
+"Compilada para bytecode (JVM)",
+"Tipagem estática e forte por padrão",
+"Foco em microsserviços, corporativo e Android",
+"Concorrência multi-threaded nativa"
 ]
 },
 "right": {
-"title": "Java 27",
+"title": "JavaScript",
 "points": [
-"Compact Object Headers de 64 bits por padrão",
-"G1 é o GC padrão em todos os ambientes",
-"JFR pode redigir argumentos, propriedades e variáveis sensíveis"
+"Interpretada e JIT (V8, SpiderMonkey)",
+"Tipagem dinâmica e fraca (ou TypeScript)",
+"Linguagem padrão da Web e Node.js no backend",
+"Event Loop single-threaded não-bloqueante"
 ]
 }
 },
 {
+"type": "code",
+"tag": "SINTAXE NA PRÁTICA",
+"title": "Como o Código Revela a Diferença",
+"description": "Veja o contraste de verbosidade e tipagem para a mesma operação:",
+"language": "comparativo.txt",
+"code": "// Java (Fortemente tipado / POO rígida)\nList tags = List.of(\"Java\", \"JVM\");\ntags.forEach(System.out::println);\n\n// JavaScript (Dinâmico / Flexível)\nconst tags = [\"JS\", \"Web\"];\ntags.forEach(tag => console.log(tag));",
+"note": "JavaScript prioriza agilidade de script; Java prioriza robustez em escala empresarial."
+},
+{
 "type": "cta",
 "tag": "CONCLUSÃO",
-"title": "Vale a pena testar o Java 27?",
-"takeaway": "Sim para testes e avaliação: os maiores ganhos estão em performance, segurança e runtime. Em produção, valide compatibilidade e lembre que Java 27 não é uma versão LTS.",
+"title": "Qual Escolher Para Estudar?",
+"takeaway": "JavaScript domina a interface web e fullstack ágil; Java sustenta sistemas legados e backends de alta performance.",
 "actions": [
 {
 "icon": "💾",
-"text": "Salve este resumo do Java 27"
+"text": "Salve para consultar e não cair mais nessa pegadinha"
 },
 {
 "icon": "🚀",
-"text": "Compartilhe com seu time Java"
+"text": "Compartilhe com quem ainda acha que JS é diminutivo de Java"
 },
 {
 "icon": "💬",
-"text": "Qual JEP do Java 27 você quer testar primeiro?"
+"text": "Qual ecossistema faz mais sentido na sua carreira hoje?"
 }
 ]
 }

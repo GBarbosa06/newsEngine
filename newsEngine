@@ -173,14 +173,9 @@ function repairCodeFields(input) {
                 /*
                  * Verifica o que existe depois da aspas.
                  *
-                 * Se for:
-                 *
-                 *   ,
-                 *   }
-                 *   ]
-                 *
-                 * consideramos que esta aspas realmente encerra
-                 * o valor JSON.
+                 * Para ser o encerramento do campo "code":
+                 * 1. Seguido por vírgula e a próxima chave JSON (ex: ,\n  "note":)
+                 * 2. Ou seguido por fechamento de objeto (}) e próximo elemento
                  */
                 let j = i + 1;
 
@@ -191,14 +186,13 @@ function repairCodeFields(input) {
                     j++;
                 }
 
-                const next = input[j];
+                const rest = input.slice(j);
+                const isEndOfField =
+                    /^,\s*"[a-zA-Z0-9_]+"\s*:/.test(rest) ||
+                    /^\}\s*(?:,|\s*\])/.test(rest) ||
+                    j >= input.length;
 
-                if (
-                    next === "," ||
-                    next === "}" ||
-                    next === "]" ||
-                    j >= input.length
-                ) {
+                if (isEndOfField) {
                     value += '"';
                     i++;
                     break;
