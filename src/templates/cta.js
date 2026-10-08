@@ -62,7 +62,7 @@ function renderCta(slide, { slideIndex, totalSlides, handle, theme }) {
 
         <!-- Follow Box -->
         <div style="display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 10px;">
-          <span style="font-size: 24px; color: ${theme.textMuted};">Siga para novidades diárias:</span>
+          <span style="font-size: 24px; color: ${theme.textMuted};">Siga para mais novidades:</span>
           <span style="font-size: 26px; font-weight: 700; color: ${theme.primary};">${handle || '@tech.newsletter'}</span>
         </div>
       </div>

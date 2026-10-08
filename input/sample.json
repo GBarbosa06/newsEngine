@@ -1,92 +1,93 @@
 {
-"theme": "amber",
+"theme": "blue",
 "ratio": "1080x1350",
-"slug": "java-vs-javascript-por-que-os-nomes-enganam",
+"slug": "spring-boot-vs-quarkus-vs-micronaut",
 "handle": "@gui.code75",
-"social_caption": "☕ Java e JavaScript são a mesma coisa? Spoiler: Java está para JavaScript assim como Carro está para Carruagem! 🚗🐎\n\nEssa confusão nasceu em 1995 por pura estratégia de marketing e segue confundindo iniciantes e recrutadores até hoje. Arraste para entender a origem do nome, as diferenças de arquitetura e onde cada um brilha no mercado atual! 🚀\n\nQual dessas linguagens você mais usa no seu dia a dia? Deixe nos comentários!",
+"social_caption": "🚀 Qual framework Java escolher em 2026? Spring Boot, Quarkus e Micronaut disputam o topo do ecossistema backend moderno, mas cada um tem uma filosofia única para lidar com performance, memória e nuvem. \n\nEnquanto o Spring Boot domina o mercado com sua estabilidade e ecossistema massivo, o Quarkus e o Micronaut trazem inovação focada em computação nativa em nuvem (Cloud-Native), imagens nativas com GraalVM e tempos de boot ultrarrápidos.\n\nDeslize para ver a comparação definitiva e descubra qual faz mais sentido para o seu próximo projeto! 💾 Compartilhe com aquele dev Java que precisa ver isso.\n\n#java #springboot #quarkus #micronaut #backend #programacao #desenvolvimentoweb",
 "hashtags": [
 "java",
-"javascript",
-"programacao",
-"desenvolvimentoweb",
+"springboot",
+"quarkus",
+"micronaut",
 "backend",
-"frontend",
-"carreiradev"
+"programacao"
 ],
 "slides": [
 {
 "type": "cover",
-"tag": "HISTÓRIA & ARQUITETURA",
-"title": "Java vs JavaScript: Por Que os Nomes Enganam Tanta Gente?",
-"subtitle": "A jogada de marketing de 1995 que confunde a comunidade até hoje.",
-"highlight": "Java está para JavaScript assim como Carro está para Carruagem."
+"tag": "BACKEND JAVA",
+"title": "Spring Boot vs Quarkus vs Micronaut",
+"subtitle": "Qual framework escolher para aplicações de alta performance na nuvem?",
+"highlight": "O duelo definitivo de 2026"
 },
 {
 "type": "content",
-"tag": "A ORIGEM",
-"title": "Tudo Começou Com Uma Parceria de Marketing",
-"body": "Em 1995, a Netscape queria uma linguagem leve para rodar no navegador Netscape Navigator.",
+"tag": "OS CONTENDORES",
+"title": "Pilares de cada ecossistema",
+"body": "Cada framework adota uma estratégia diferente para resolver os gargalos clássicos do Java:",
 "bullets": [
 {
-"title": "O nome original era Mocha",
-"text": "Brendan Eich criou a linguagem em 10 dias como Mocha, rebatizada depois para LiveScript."
+"title": "Spring Boot",
+"text": "O gigante da indústria. Ecossistema gigante, estabilidade incomparável e integração profunda."
 },
 {
-"title": "Pegando carona no hype",
-"text": "Com a explosão de popularidade do Java da Sun Microsystems, a Netscape rebatizou para JavaScript como manobra comercial."
+"title": "Quarkus",
+"text": "Focado em cloud-native. Desenvolvido pela Red Hat, oferece live coding excelente e ótimo suporte a GraalVM."
+},
+{
+"title": "Micronaut",
+"text": "Processamento em tempo de compilação (AOT). Elimina reflexão pesada para garantir consumo mínimo de memória."
 }
 ]
 },
 {
 "type": "comparison",
-"tag": "PARADIGMAS & ECOSSISTEMA",
-"title": "Mundos Completamente Diferentes",
-"subtitle": "Comparativo técnico direto entre as duas tecnologias",
+"tag": "COMPARATIVO",
+"title": "Arquitetura e Performance",
+"subtitle": "Como eles se comportam na prática em ambientes modernos",
 "left": {
-"title": "Java",
+"title": "Spring Boot",
 "points": [
-"Compilada para bytecode (JVM)",
-"Tipagem estática e forte por padrão",
-"Foco em microsserviços, corporativo e Android",
-"Concorrência multi-threaded nativa"
+"Maior consumo de memória RAM",
+"Ecossistema e comunidade insuperáveis",
+"Inicialização mais lenta no modo JVM tradicional"
 ]
 },
 "right": {
-"title": "JavaScript",
+"title": "Quarkus / Micronaut",
 "points": [
-"Interpretada e JIT (V8, SpiderMonkey)",
-"Tipagem dinâmica e fraca (ou TypeScript)",
-"Linguagem padrão da Web e Node.js no backend",
-"Event Loop single-threaded não-bloqueante"
+"Inicialização extremamente rápida (Cold Start)",
+"Otimizados para Serverless e Kubernetes",
+"Processamento em tempo de compilação"
 ]
 }
 },
 {
 "type": "code",
-"tag": "SINTAXE NA PRÁTICA",
-"title": "Como o Código Revela a Diferença",
-"description": "Veja o contraste de verbosidade e tipagem para a mesma operação:",
-"language": "comparativo.txt",
-"code": "// Java (Fortemente tipado / POO rígida)\nList tags = List.of(\"Java\", \"JVM\");\ntags.forEach(System.out::println);\n\n// JavaScript (Dinâmico / Flexível)\nconst tags = [\"JS\", \"Web\"];\ntags.forEach(tag => console.log(tag));",
-"note": "JavaScript prioriza agilidade de script; Java prioriza robustez em escala empresarial."
+"tag": "NA PRÁTICA",
+"title": "Injeção de Dependência",
+"description": "Como o Micronaut e Quarkus evitam reflexão em tempo de execução:",
+"language": "java",
+"code": "@Singleton\npublic class UserService {\n    // Injeção resolvida em tempo de compilação (AOT)\n    private final UserRepository repository;\n    \n    public UserService(UserRepository repository) {\n        this.repository = repository;\n    }\n}",
+"note": "Menos reflexão significa menos uso de memória e boots em milissegundos."
 },
 {
 "type": "cta",
 "tag": "CONCLUSÃO",
-"title": "Qual Escolher Para Estudar?",
-"takeaway": "JavaScript domina a interface web e fullstack ágil; Java sustenta sistemas legados e backends de alta performance.",
+"title": "Qual vale a pena escolher?",
+"takeaway": "Vá de Spring Boot se precisa de ecossistema maduro. Escolha Quarkus ou Micronaut para microsserviços focados em nuvem e serverless.",
 "actions": [
 {
 "icon": "💾",
-"text": "Salve para consultar e não cair mais nessa pegadinha"
+"text": "Salve para consultar depois"
 },
 {
 "icon": "🚀",
-"text": "Compartilhe com quem ainda acha que JS é diminutivo de Java"
+"text": "Compartilhe com quem programa"
 },
 {
 "icon": "💬",
-"text": "Qual ecossistema faz mais sentido na sua carreira hoje?"
+"text": "Qual deles você usa no dia a dia?"
 }
 ]
 }
